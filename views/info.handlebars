@@ -16,26 +16,35 @@
         <table class="table">
             <thead>
             <th>Type</th>
-            <!--<th>File size</th>-->
+            <th>Resolution</th>
+            <th>File size</th>
             <th>Download</th>
             </thead>
             <tbody>
-            <tr>
-                <td>Highest (.mp4)</td>
-                <td class="text-right">
-                    <a href="javascript:void(0)" rel="nofollow" type="button"
-                       class="btn btn-success download-button" data-format="mp4"
-                       data-quality="highest">Download</a>
-                </td>
-            </tr>
-            <tr>
-                <td>Audio (.webm)</td>
-                <td>
-                    <a href="javascript:void(0)" rel="nofollow" type="button"
-                       class="btn btn-success download-button" data-format="mp4"
-                       data-quality="highestaudio">Download</a>
-                </td>
-            </tr>
+            {{#each formats.mp4 }}
+                <tr>
+                    <td>MP4</td>
+                    <td>{{ quality_label }}</td>
+                    <td>{{ clen }}</td>
+                    <td class="text-right">
+                        <a href="javascript:void(0)" rel="nofollow" type="button"
+                           class="btn btn-success download-button" data-format=".mp4"
+                           data-quality="{{ itag }}">Download</a>
+                    </td>
+                </tr>
+            {{/each}}
+            {{#each formats.webm }}
+                <tr>
+                    <td>WEBM</td>
+                    <td>{{ quality_label }}</td>
+                    <td>{{ clen }}</td>
+                    <td class="text-right">
+                        <a href="javascript:void(0)" rel="nofollow" type="button"
+                           class="btn btn-success download-button" data-format=".mp4"
+                           data-quality="{{ itag }}">Download</a>
+                    </td>
+                </tr>
+            {{/each}}
             </tbody>
         </table>
     </div>
@@ -57,7 +66,7 @@
             form.attr("method", "post");
             form.attr("action", apiUrl);
 
-            $.each(data, function(key, value) {
+            $.each(data, function (key, value) {
                 var field = $('<input></input>');
 
                 field.attr("type", "hidden");
